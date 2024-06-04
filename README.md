@@ -11,5 +11,5 @@ with the following changes:
 To use this gem, add this to your `Gemfile`:
 
 ```rb
-gem "thingiverse", github: "sunny/thingiverse-ruby", branch: "main"
+gem "thingiverse", github: "cults/thingiverse-ruby", branch: "main"
 ```
