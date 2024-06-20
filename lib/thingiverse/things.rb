@@ -63,13 +63,7 @@ module Thingiverse
       raise ArgumentError, "Unable to determine filename" if thingiverse_filename.to_s == ""
 
       response = Thingiverse::Connection.post("/things/#{id}/files", :body => {:filename => thingiverse_filename}.to_json)
-<<<<<<< HEAD
       raise ResponseError.new(response) unless response.success?
-||||||| ed44e9a
-      raise "#{response.code}: #{JSON.parse(response.body)['error']} #{response.headers['x-error']}" unless response.success?
-=======
-      raise ResponseError.from(response) unless response.success?
->>>>>>> rate-limit-exceeded-error
 
       parsed_response = JSON.parse(response.body)
       action = parsed_response["action"]
@@ -102,13 +96,7 @@ module Thingiverse
       if c.response_code == 200
         # finalize it
         response = Thingiverse::Connection.post(query['success_action_redirect'])
-<<<<<<< HEAD
         raise ResponseError.new(response) unless response.success?
-||||||| ed44e9a
-        raise "#{response.code}: #{JSON.parse(response.body)['error']} #{response.headers['x-error']}" unless response.success?
-=======
-        raise ResponseError.from(response) unless response.success?
->>>>>>> rate-limit-exceeded-error
         Thingiverse::Files.new(response.parsed_response)
       else
         raise "#{c.response_code}: #{c.body_str}"
@@ -120,13 +108,7 @@ module Thingiverse
         raise "Cannot publish until thing is saved"
       else
         response = Thingiverse::Connection.post("/things/#{id}/publish")
-<<<<<<< HEAD
         raise ResponseError.new(response) unless response.success?
-||||||| ed44e9a
-        raise "#{response.code}: #{JSON.parse(response.body)['error']}" unless response.success?
-=======
-        raise ResponseError.from(response) unless response.success?
->>>>>>> rate-limit-exceeded-error
 
         thing = Thingiverse::Things.new(response.parsed_response)
       end
@@ -138,13 +120,7 @@ module Thingiverse
 
     def self.find(thing_id)
       response = Thingiverse::Connection.get("/things/#{thing_id}")
-<<<<<<< HEAD
-      raise ResponseError.new(response) unless response.success?
-||||||| ed44e9a
-      raise "#{response.code}: #{JSON.parse(response.body)['error']} #{response.headers['x-error']}" unless response.success?
-=======
       raise ResponseError.from(response) unless response.success?
->>>>>>> rate-limit-exceeded-error
       self.new response.parsed_response
     end
 
@@ -156,13 +132,7 @@ module Thingiverse
       thing = self.new(params)
 
       response = Thingiverse::Connection.post('/things', :body => thing.attributes.to_json)
-<<<<<<< HEAD
       raise ResponseError.new(response) unless response.success?
-||||||| ed44e9a
-      raise "#{response.code}: #{JSON.parse(response.body)['error']} #{response.headers['x-error']}" unless response.success?
-=======
-      raise ResponseError.from(response) unless response.success?
->>>>>>> rate-limit-exceeded-error
 
       self.new(response.parsed_response)
     end

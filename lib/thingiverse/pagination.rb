@@ -12,15 +12,7 @@ module Thingiverse
       @response = response
       @object   = object
 
-<<<<<<< HEAD
       raise ResponseError.new(@response) unless @response.success?
-||||||| ed44e9a
-      # TODO: provide more debug info and raise a custom exception
-      raise "#{@response.code}: #{JSON.parse(@response.body)['error']}" unless @response.success?
-      
-=======
-      raise ResponseError.from(@response) unless @response.success?
->>>>>>> rate-limit-exceeded-error
 
       @objects = @response.parsed_response.collect do |attrs|
         @object.new attrs
